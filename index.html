@@ -60,6 +60,35 @@
     [data-reveal] { animation: revealIn 1s linear both; animation-timeline: view(); animation-range: entry 2% cover 16%; }
   }
   @media (prefers-reduced-motion: reduce) { [data-reveal] { animation: none !important; opacity:1 !important; transform:none !important; } }
+
+  /* Phone layout. The page is built from inline-styled grids sized for a
+     desktop stage, so below this width every one of them is collapsed to a
+     single column; !important is what lets these outrank the inline styles. */
+  @media (max-width: 700px) {
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+
+    /* The header is logo | links | location on one row, which squeezes the six
+       links into a 177px column three rows deep. Give them a full-width row of
+       their own underneath instead. */
+    header {
+      flex-wrap: wrap !important;
+      padding: 14px 20px !important;
+    }
+    header > nav {
+      order: 3;
+      width: 100%;
+      justify-content: center !important;
+      flex-wrap: wrap !important;
+      gap: 14px !important;
+      row-gap: 6px !important;
+      margin-top: 10px;
+    }
+    header > nav a { font-size: 13px !important; }
+
+    /* The portrait is the second hero column; once stacked it should fill the
+       width rather than keep the sliver the two-up grid left it. */
+    image-slot, img { max-width: 100%; }
+  }
 </style>
 </helmet>
 
