@@ -4,13 +4,16 @@ Personal portfolio website, designed in [Claude Design](https://claude.ai/design
 
 ## Structure
 
-- `index.html` — the site (single page)
-- `assets/` — images used by the page
+- `index.html` — the portfolio (single page)
+- `alivyo.html` — the Alivyo product page, linked from *Featured work*. It is a self-contained bundle: its markup, styles and images live inside the `<script type="__bundler/template">` block, which replaces the document at load, so edits to its outer `<head>` are discarded
+- `assets/` — images used by the portfolio (`og-image.jpg` is the link-preview card)
 - `support.js`, `image-slot.js` — runtime scripts the exported design depends on
 - `vendor/` — local copies of React 18 UMD builds so the site has no CDN dependency
-- `project/uploads/` — original design source material (drafts, mockups); not used by the live site
+- `project/uploads/` — original design source material (drafts, mockups); not published
 - `.github/workflows/deploy.yml` — GitHub Pages deployment workflow
 - `.nojekyll` — tells GitHub Pages to serve files as-is (no Jekyll processing)
+
+The workflow copies only the files the pages load into `_site/` and publishes that. If you add a new page or top-level folder, add it to the **Stage site files** step or it will not be deployed.
 
 ## Deployment
 
