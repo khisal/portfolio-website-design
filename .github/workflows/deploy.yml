@@ -29,10 +29,18 @@ jobs:
         with:
           enablement: true
 
+      # Publish only what the pages load. Uploading the repo root would also
+      # serve project/uploads/ (drafts, source JSX, Profile.pdf), README.md and
+      # the workflow itself at public URLs.
+      - name: Stage site files
+        run: |
+          mkdir _site
+          cp -r index.html alivyo.html support.js image-slot.js .image-slots.state.json .nojekyll assets vendor _site/
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
